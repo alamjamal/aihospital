@@ -1,0 +1,17 @@
+{% extends "adminlayout.html" %}
+
+
+{% block body%}
+
+<h2>Presenting  Machine Learning And IoT togather</h2>
+ <div class="line"></div>
+
+       <h1> Prediction Result = {{prediction}}</h1>
+	   
+	   {% if prediction==0%}
+	   
+	   <h1> you dont have disease</h1>
+	   {% else %}
+	   <h1>you have disease</h1>
+	   {% endif %}
+{% endblock%}
