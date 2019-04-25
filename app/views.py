@@ -7,6 +7,7 @@ import urllib.request
 import simplejson as json
 import pickle
 import pandas as pd
+import pygal
 with open(f'model/NBmodel.pkl', 'rb') as f:
     model = pickle.load(f)
 
@@ -78,10 +79,28 @@ def deletedisease(id):
 
 
 
-
+from sqlalchemy import func
 @app.route('/showpatientgraph')
 def showpatientgraph():
-    return render_template('adminblank.html')
+	count=0
+	count1=0
+	data=Disease_Present_Data.query.all()
+	for row in data:
+		print(row.disease)
+		if(row.disease==0):
+			count+=1
+		if(row.disease==1):
+			count1+=1
+	print(count)
+	pie_chart = pygal.Pie(inner_radius=.4)
+	pie_chart.title = 'Disease Ratio'
+	pie_chart.add('Disease No', [count])
+	pie_chart.add('Disease Yes', [count1])
+	pie_chart.render()
+	graph_data = pie_chart.render_data_uri()
+	return render_template('adminblank.html',graph_data = graph_data)
+
+
 
 @app.route('/elogin')
 def elogin():
