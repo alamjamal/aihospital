@@ -1,6 +1,14 @@
 {% extends "layout.html" %}
-{% block body %}
-<h1>this is about page</h1>
 
-<h1>{{session['disease']}}</h1>
+{% block body %}
+
+
+
+{% if  session['disease']==0 %}
+<p class="display-2 text-center ">Our Machine Learning Algorithm  detected that you dont have disease..<br> thanks to machine learning</p>
+{% else %}
+<p class="display-2 text-center ">Our Machine Learning Algorithm  detected that you  have disease... we are working hard to recommend you medicine </p>
+{% endif %}
+
+
 {% endblock %}
